@@ -33,6 +33,25 @@ const Signin = () => {
       })
       .catch((error) => {
         toast.error(error.message);
+        if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No account found with this email");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password");
+        } else if (error.code === "auth/invalid-credential") {
+          toast.error("Email or password is incorrect");
+        } else if (error.code === "auth/user-disabled") {
+          toast.error("This account has been disabled");
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too many login attempts. Try again later");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Please check your internet");
+        } else if (error.code === "auth/operation-not-allowed") {
+          toast.error("Email/password login is not enabled");
+        } else {
+          toast.error("Login failed. Please try again");
+        }
       });
   };
 
@@ -41,7 +60,7 @@ const Signin = () => {
       .then((result) => {
         console.log(result);
         toast.success("google signin successful");
-        setuser(result.user)
+        setuser(result.user);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -69,7 +88,7 @@ const Signin = () => {
           features and more..
         </h2>
       </div>
-      <div  className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-5 items-center w-full max-w-md">
+      <div className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-5 items-center w-full max-w-md">
         {user ? (
           <div className=" text-center w-full">
             <img

@@ -6,10 +6,8 @@ import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 
-
-
 const Signup = () => {
-  const [show,setshow]=useState(false)
+  const [show, setshow] = useState(false);
 
   const hendlesubmit = (e) => {
     e.preventDefault();
@@ -20,8 +18,8 @@ const Signup = () => {
     const password = e.target.password.value;
     console.log(name, photo, email, password);
 
-    if(password.length < 6){
-      toast.error('password should be at least 6 digit')
+    if (password.length < 6) {
+      toast.error("password should be at least 6 digit");
       return;
     }
     const upperlower = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
@@ -44,9 +42,31 @@ const Signup = () => {
       })
       .catch((error) => {
         console.log(error.message);
-       
-        if(error.code == 'auth/email-already-in-use'){
-          toast.error('user already exist in database');
+
+        if (error.code == "auth/email-already-in-use") {
+          toast.error("user already exist in database");
+        } else if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address");
+        } else if (error.code === "auth/weak-password") {
+          toast.error("Password should be at least 6 characters");
+        } else if (error.code === "auth/user-not-found") {
+          toast.error("No user found with this email");
+        } else if (error.code === "auth/wrong-password") {
+          toast.error("Incorrect password");
+        } else if (error.code === "auth/too-many-requests") {
+          toast.error("Too many attempts. Please try again later");
+        } else if (error.code === "auth/network-request-failed") {
+          toast.error("Network error. Check your internet connection");
+        } else if (error.code === "auth/operation-not-allowed") {
+          toast.error("This login method is not enabled");
+        } else if (error.code === "auth/requires-recent-login") {
+          toast.error("Please login again to continue");
+        } else if (error.code === "auth/user-disabled") {
+          toast.error("This user account has been disabled");
+        } else if (error.code === "auth/popup-closed-by-user") {
+          toast.error("Popup closed before completing login");
+        } else {
+          toast.error("Something went wrong. Please try again");
         }
       });
   };
@@ -60,60 +80,64 @@ const Signup = () => {
         </h3>
       </div>
       <div className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-15 py-5 items-center">
-      
         <form onSubmit={hendlesubmit} action="">
-          <h2 className="text-xl text-center font-semibold pb-4">Please Sign up</h2>
-        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-          
+          <h2 className="text-xl text-center font-semibold pb-4">
+            Please Sign up
+          </h2>
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <label className="label">Name</label>
+            <input
+              name="name"
+              type="name"
+              className="input"
+              placeholder="Your name"
+              required
+            />
 
-          <label className="label">Name</label>
-          <input
-            name="name"
-            type="name"
-            className="input"
-            placeholder="Your name"
-            required
-          />
+            <label className="label">Photo</label>
+            <input
+              type="photo"
+              name="photo"
+              className="input"
+              placeholder="Photo url"
+            />
 
-          <label className="label">Photo</label>
-          <input
-            type="photo"
-            name="photo"
-            className="input"
-            placeholder="Photo url"
-          />
+            <label className="label">Email</label>
+            <input
+              name="email"
+              type="email"
+              className="input"
+              placeholder="Email"
+              required
+            />
 
-          <label className="label">Email</label>
-          <input
-            name="email"
-            type="email"
-            className="input"
-            placeholder="Email"
-            required
-          />
-
-          <div className="relative">
-            <label className="label">Password</label>
-          <input
-            name="password"
-            type={show?'text':'password'}
-            className="input"
-            placeholder="Password"
-            required
-          />
-          <span onClick={()=>setshow(!show)} className=" absolute right-[10px]  bottom-3.5  cursor-pointer">{show? <FaEye />:<IoEyeOff />}</span>
-          </div>
-          <p>
-            Already have an Account Please?{" "}
-            <Link className="text-blue-400 hover:underline" to={"/signin"}>
-              Sign in
-            </Link>
-          </p>
-          <button className="btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200">
-            Sign up
-          </button>
-        </fieldset>
-      </form>
+            <div className="relative">
+              <label className="label">Password</label>
+              <input
+                name="password"
+                type={show ? "text" : "password"}
+                className="input"
+                placeholder="Password"
+                required
+              />
+              <span
+                onClick={() => setshow(!show)}
+                className=" absolute right-[10px]  bottom-3.5  cursor-pointer"
+              >
+                {show ? <FaEye /> : <IoEyeOff />}
+              </span>
+            </div>
+            <p>
+              Already have an Account Please?{" "}
+              <Link className="text-blue-400 hover:underline" to={"/signin"}>
+                Sign in
+              </Link>
+            </p>
+            <button className="btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200">
+              Sign up
+            </button>
+          </fieldset>
+        </form>
       </div>
     </div>
   );
