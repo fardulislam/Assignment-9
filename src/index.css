@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+ /* @plugin "daisyui" {
+  themes: light --default, 
+ } */
+
+ @plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+ --color-primary: #15803D;    /* Hunter Green */
+  --color-secondary: #81C784;  /* Light Greenish Gray */
+  --color-accent: #FFB74D;     /* Warm Orange (ফুলের বা হাইলাইটের জন্য) */
+  --color-base-200: #F5F5F5;   /* Light Gray */
+  --color-base-300: #EEEEEE;   /* Medium Gray */
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}

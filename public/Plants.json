@@ -1,0 +1,74 @@
+[
+  {
+    "plantId": 1,
+    "plantName": "Snake Plant",
+    "category": "Air Purifier",
+    "price": 18,
+    "rating": 4.8,
+    "availableStock": 10,
+    "careLevel": "Easy",
+    "description": "A hardy plant that purifies indoor air and thrives in low light.",
+    "image": "https://i.postimg.cc/5N9Gd2bQ/snake-plant.png",
+    "providerName": "UrbanGreen Studio"
+  },
+  {
+    "plantId": 2,
+    "plantName": "Peace Lily",
+    "category": "Flowering",
+    "price": 22,
+    "rating": 4.7,
+    "availableStock": 8,
+    "careLevel": "Medium",
+    "description": "Elegant white flowers with excellent air-purifying qualities.",
+    "image": "https://i.postimg.cc/9fQJ8vZb/peace-lily.png",
+    "providerName": "GreenLeaf Nursery"
+  },
+  {
+    "plantId": 3,
+    "plantName": "Spider Plant",
+    "category": "Air Purifier",
+    "price": 15,
+    "rating": 4.6,
+    "availableStock": 15,
+    "careLevel": "Easy",
+    "description": "Fast-growing indoor plant that removes toxins from the air.",
+    "image": "https://i.postimg.cc/j5k6zqYB/spider-plant.png",
+    "providerName": "EcoHome Plants"
+  },
+  {
+    "plantId": 4,
+    "plantName": "Monstera Deliciosa",
+    "category": "Decorative",
+    "price": 30,
+    "rating": 4.9,
+    "availableStock": 6,
+    "careLevel": "Medium",
+    "description": "Large tropical leaves that add a bold look to any room.",
+    "image": "https://i.postimg.cc/7Zz2xY9k/monstera.png",
+    "providerName": "Leaf & Bloom"
+  },
+  {
+    "plantId": 5,
+    "plantName": "Aloe Vera",
+    "category": "Medicinal",
+    "price": 12,
+    "rating": 4.5,
+    "availableStock": 20,
+    "careLevel": "Easy",
+    "description": "Succulent plant known for its healing and skincare benefits.",
+    "image": "https://i.postimg.cc/mrXcH8F2/aloe-vera.png",
+    "providerName": "NatureCare Plants"
+  },
+  {
+    "plantId": 6,
+    "plantName": "ZZ Plant",
+    "category": "Low Light",
+    "price": 25,
+    "rating": 4.8,
+    "availableStock": 9,
+    "careLevel": "Easy",
+    "description": "Extremely low-maintenance plant ideal for beginners.",
+    "image": "https://i.postimg.cc/3R9G7kPz/zz-plant.png",
+    "providerName": "GreenNest"
+  }
+]
