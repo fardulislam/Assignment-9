@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth } from "../firsebase/Firesebase.config";
 import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
@@ -12,11 +12,11 @@ const Signup = () => {
   const hendlesubmit = (e) => {
     e.preventDefault();
     // console.log('click function')
-    const name = e.target.name.value;
-    const photo = e.target.photo.value;
+    const displayName = e.target.name.value;
+    const photoURL = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photo, email, password);
+    console.log(displayName, photoURL, email, password);
 
     if (password.length < 6) {
       toast.error("password should be at least 6 digit");
@@ -37,8 +37,30 @@ const Signup = () => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
+        updateProfile(result.user , {
+         displayName,
+         photoURL,
+        }).then((res)=>{
+          sendEmailVerification(result.user)
+          .then((res)=>{
+            console.log(res)
+            if(!result.user?.emailVerified){
+             
+              toast.success('signup successful. check your email and validate your account')
+              return;
+            }
+          })
+          .catch((e)=>{
+            toast.error(e.message)
+          })
+          console.log(res)
+          // toast.success('signup successful')
+        })
+        .catch((e)=>{
+          toast.error(e.message)
+        })
         console.log(result.user);
-        toast.success("sign up successfully ");
+        // toast.success("sign up successfully ");
       })
       .catch((error) => {
         console.log(error.message);
