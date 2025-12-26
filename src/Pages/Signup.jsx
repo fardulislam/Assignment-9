@@ -1,13 +1,24 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
-import { auth } from "../firsebase/Firesebase.config";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
+
 import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { AuthContext } from "../Contex/AuthContext";
 
 const Signup = () => {
   const [show, setshow] = useState(false);
+
+  const {
+    createUserWithEmailAndPasswordfunc,
+    updateProfilefund,
+    sendEmailVerificationfunc,
+    setloading,
+    signoutuserfunc,
+    setuser,
+  } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const hendlesubmit = (e) => {
     e.preventDefault();
@@ -34,31 +45,36 @@ const Signup = () => {
       toast.error("Password must include at least one special symbol.");
       return;
     }
-
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPasswordfunc(email, password)
+      // createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        updateProfile(result.user , {
-         displayName,
-         photoURL,
-        }).then((res)=>{
-          sendEmailVerification(result.user)
-          .then((res)=>{
-            console.log(res)
-            if(!result.user?.emailVerified){
-             
-              toast.success('signup successful. check your email and validate your account')
-              return;
-            }
+        updateProfilefund(displayName, photoURL)
+          .then((res) => {
+            sendEmailVerificationfunc().then((res) => {
+              console.log(res);
+              setloading(false);
+              if (!result.user?.emailVerified) {
+                
+                return;
+              }
+            });
+            signoutuserfunc()
+              .then(() => {
+                toast.success(
+                  "signup successful. check your email and validate your account"
+                );
+                setuser(null);
+                navigate('/signin')
+              })
+              .catch((e) => {
+                toast.error(e.message);
+              });
+            console.log(res);
+            // toast.success('signup successful')
           })
-          .catch((e)=>{
-            toast.error(e.message)
-          })
-          console.log(res)
-          // toast.success('signup successful')
-        })
-        .catch((e)=>{
-          toast.error(e.message)
-        })
+          .catch((e) => {
+            toast.error(e.message);
+          });
         console.log(result.user);
         // toast.success("sign up successfully ");
       })

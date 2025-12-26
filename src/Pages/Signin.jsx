@@ -1,30 +1,46 @@
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
+  
+  
 } from "firebase/auth";
-import React, { useRef, useState } from "react";
-import { Link } from "react-router";
-import { auth } from "../firsebase/Firesebase.config";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+
 import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
-
-const googleprovaider = new GoogleAuthProvider();
-const githubprovaider = new GithubAuthProvider();
+import { AuthContext } from "../Contex/AuthContext";
 
 const Signin = () => {
-  const [user, setuser] = useState(null);
+  
 
   const [show, setshow] = useState(false);
 
-  const emailref = useRef(null)
+  const {
+    signInWithEmailAndPasswordfunc,
+    signInWithemailPopupfunc,
+    signInWithgithubPopupfunc,
+   setloading,
+    sendPasswordResetEmailfunc,
+    user,
+    setuser,
+  } = useContext(AuthContext);
 
+  const Navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state || '/';
+  console.log(location)
 
-// sign in //
+  if(user){
+    Navigate('/');
+    return 
+    
+  }
+
+  const emailref = useRef(null);
+
+  // sign in //
 
   const hendlesignin = (e) => {
     e.preventDefault();
@@ -33,15 +49,18 @@ const Signin = () => {
 
     console.log(email, password);
 
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPasswordfunc(email, password)
       .then((result) => {
+        console.log(result);
+        setloading(false)
         if (!result.user.emailVerified) {
           toast.error("Please verify your email first");
+       
           return;
         }
-        console.log(result);
         setuser(result.user);
         toast.success("successfully sign in");
+        Navigate(from);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -67,24 +86,27 @@ const Signin = () => {
       });
   };
   // forget password//
-  const hendleforgetpassword = (e)=>{
-    const email = emailref.current.value
-    sendPasswordResetEmail(auth,email)
-    .then(()=>{
-      toast.success('check your email to reset password')
-    }).catch((e)=>{
-      toast.error(e.message)
-    })
-    
-  }
+  const hendleforgetpassword = () => {
+    const email = emailref.current.value;
+    sendPasswordResetEmailfunc(email)
+      .then(() => {
+        setloading(false)
+        toast.success("check your email to reset password");
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
   // google sign in //
 
   const hendlegooglesignin = () => {
-    signInWithPopup(auth, googleprovaider)
+   signInWithemailPopupfunc()
       .then((result) => {
         console.log(result);
+        setloading(false);
         toast.success("google signin successful");
         setuser(result.user);
+        Navigate(from);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -94,28 +116,20 @@ const Signin = () => {
   // github sign in//
 
   const hendlegithubsignin = () => {
-    signInWithPopup(auth, githubprovaider)
+    signInWithgithubPopupfunc()
       .then((result) => {
         console.log(result);
-        toast.success("github signin successful");
+        setloading(false)
         setuser(result.user);
+        toast.success("github signin successful");
+        Navigate(from);
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
+
  
-  // sign out //
-  const hendlesignout = () => {
-    signOut(auth)
-      .then(() => {
-        toast.success("signout successful");
-        setuser(null);
-      })
-      .catch((e) => {
-        toast.error(e.message);
-      });
-  };
 
   console.log(user);
   return (
@@ -128,26 +142,6 @@ const Signin = () => {
         </h2>
       </div>
       <div className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-6 items-center w-full max-w-md">
-        {user ? (
-          <div className=" text-center w-full">
-            <img
-              className="h-20 w-20 rounded-full mx-auto"
-              src={
-                user?.photoURL ||
-                "https://i.ibb.co.com/mVq8rsrb/photo-1610568781018-995405522539.avif"
-              }
-              alt=""
-            />
-            <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-            <p className="">{user?.email}</p>
-            <button
-              className="w-full btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200"
-              onClick={hendlesignout}
-            >
-              sign out
-            </button>
-          </div>
-        ) : (
           <form onSubmit={hendlesignin} action="">
             <h2 className="text-xl text-center font-semibold pb-4">
               Please Sign in
@@ -155,7 +149,7 @@ const Signin = () => {
             <fieldset className="w-full ">
               <label className="label">Email</label>
               <input
-              ref={emailref}
+                ref={emailref}
                 name="email"
                 type="email"
                 className="input input-bordered w-full"
@@ -179,7 +173,13 @@ const Signin = () => {
                   {show ? <FaEye /> : <IoEyeOff />}
                 </span>
               </div>
-              <button type="button" onClick={hendleforgetpassword} className="text-sm hover:underline ">Forget password?</button>
+              <button
+                type="button"
+                onClick={hendleforgetpassword}
+                className="text-sm hover:underline "
+              >
+                Forget password?
+              </button>
 
               <button className="w-full btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200">
                 Sign in
@@ -248,7 +248,6 @@ const Signin = () => {
               </p>
             </fieldset>
           </form>
-        )}
       </div>
     </div>
   );
