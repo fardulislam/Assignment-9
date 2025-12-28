@@ -6,6 +6,8 @@ import { AuthContext } from "../Contex/AuthContext";
 import { FadeLoader } from "react-spinners";
 import Sectiontitle from "../component/Sectiontitle";
 import Sectiontitle2 from "../component/Sectiontitle2";
+import ChosePlant from "../component/ChosePlant";
+import Selectplants from "../component/Selectplants";
 
 const Homepages = () => {
   const { loading } = useContext(AuthContext);
@@ -35,6 +37,8 @@ const Homepages = () => {
        </section>
        <section>
         <Sectiontitle2></Sectiontitle2>
+        <ChosePlant></ChosePlant>
+        <Selectplants></Selectplants>
         
        </section>
 

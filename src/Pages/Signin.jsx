@@ -152,7 +152,7 @@ const Signin = () => {
                 ref={emailref}
                 name="email"
                 type="email"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-green-200"
                 placeholder="Email"
                 required
               />
@@ -162,7 +162,7 @@ const Signin = () => {
                 <input
                   name="password"
                   type={show ? "text" : "password"}
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full bg-green-200"
                   placeholder="Password"
                   required
                 />
@@ -181,7 +181,7 @@ const Signin = () => {
                 Forget password?
               </button>
 
-              <button className="w-full btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200">
+              <button className="w-full btn bg-[#0F3D2E] text-white mt-4 hover:scale-105 transition-transform duration-200">
                 Sign in
               </button>
               <div className="flex justify-center items-center gap-2 mt-6">

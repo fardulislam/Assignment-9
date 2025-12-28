@@ -7,7 +7,7 @@ const Sectiontitle2 = () => {
         <div className="flex-grow h-px bg-gray-300"></div>
 
         <h2 className="text-2xl md:text-3xl font-bold uppercase">
-          Featured Green Collection
+          Choosing the Right Plant
         </h2>
 
         <div className="flex-grow h-px bg-gray-300"></div>

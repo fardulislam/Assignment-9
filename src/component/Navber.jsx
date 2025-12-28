@@ -117,7 +117,7 @@ const Navber = () => {
                   sign out
                 </button>
               </div>
-              <button  onClick={hendlesignout} className=" btn btn-primary ">
+              <button  onClick={hendlesignout} className=" btn text-white bg-[#0F3D2E] ">
                 <Link to={'/signup'}>sign out</Link>
               </button>
             </div>
@@ -125,7 +125,7 @@ const Navber = () => {
              
           ) : (
             <div className="navbar-end">
-              <a className="btn btn-primary "><Link to={'/signin'}>Sign in</Link></a>
+              <a className="btn text-white bg-[#0F3D2E]"><Link to={'/signin'}>Sign in</Link></a>
             </div>
           )}
          </div>

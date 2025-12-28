@@ -109,25 +109,25 @@ const Signup = () => {
       });
   };
   return (
-    <div className="flex flex-col md:flex-row px-10  justify-around items-center my-20">
-      <div className="space-y-2 my-10 text-center md:text-start">
+    <div className="flex  flex-col md:flex-row p-20 justify-center min-h-screen items-center  gap-10 md:gap-30 bg-green-300">
+      <div className="space-y-2 my-10  text-center md:text-start">
         <h1 className="text-2xl font-bold">Create your Account</h1>
         <h3 className="text-sm ">
           join our company and unlock exclusive features. Your journey begins
           here!
         </h3>
       </div>
-      <div className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-15 py-5 items-center">
+      <div className="backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-6 items-center w-full max-w-md">
         <form onSubmit={hendlesubmit} action="">
           <h2 className="text-xl text-center font-semibold pb-4">
             Please Sign up
           </h2>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+          <fieldset className="w-full">
             <label className="label">Name</label>
             <input
               name="name"
               type="name"
-              className="input"
+              className="input input-bordered w-full bg-green-200"
               placeholder="Your name"
               required
             />
@@ -136,7 +136,7 @@ const Signup = () => {
             <input
               type="photo"
               name="photo"
-              className="input"
+              className="input input-bordered w-full bg-green-200"
               placeholder="Photo url"
             />
 
@@ -144,7 +144,7 @@ const Signup = () => {
             <input
               name="email"
               type="email"
-              className="input"
+              className="input input-bordered w-full bg-green-200"
               placeholder="Email"
               required
             />
@@ -154,7 +154,7 @@ const Signup = () => {
               <input
                 name="password"
                 type={show ? "text" : "password"}
-                className="input"
+                className="input input-bordered w-full bg-green-200"
                 placeholder="Password"
                 required
               />
@@ -165,13 +165,13 @@ const Signup = () => {
                 {show ? <FaEye /> : <IoEyeOff />}
               </span>
             </div>
-            <p>
+            <p className="text-sm">
               Already have an Account Please?{" "}
               <Link className="text-blue-400 hover:underline" to={"/signin"}>
                 Sign in
               </Link>
             </p>
-            <button className="btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200">
+            <button className="w-full btn bg-[#0F3D2E] text-white mt-4 hover:scale-105 transition-transform duration-200">
               Sign up
             </button>
           </fieldset>
