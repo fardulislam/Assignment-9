@@ -1,36 +1,32 @@
 import React from "react";
 import { Link } from "react-router";
 
-const PlantCard = ({plant}) => {
-     console.log("Plant passed to Card:", plant);
-     console.log("Link plant id:", plant.id);
-
+const PlantCard = ({ plant }) => {
   return (
-    <div className="border rounded-lg shadow p-4 flex flex-col items-center">
+    <div className="bg-white rounded-lg shadow  flex flex-col hover:scale-105 transition-transform duration-200">
+    
       {/* Image */}
       <img
         src={plant.image}
         alt={plant.plantName}
-        className="w-full h-48 object-cover rounded-md"
+        className="w-full h-38 object-cover rounded-md"
       />
 
-      {/* Name */}
-      <h3 className="mt-2 text-lg font-semibold">{plant.plantName}</h3>
+      <div className="p-2">
+        <h3 className="mt-2 text-lg font-semibold">{plant.plantName}</h3>
 
-      {/* Price */}
-      <p className="text-green-600 font-bold mt-1">${plant.price}</p>
+        <div className="flex  justify-between ">
+          <p className="text-green-600 font-bold mt-1">${plant.price}</p>
 
-      {/* Rating */}
-      <p className="text-yellow-500 mt-1">Rating: {plant.rating} ⭐</p>
+          <p className="text-yellow-500 mt-1">Rating: {plant.rating} ⭐</p>
+        </div>
 
-      {/* View Details button */}
-      <Link to={`/plants/${plant.plantId}`}>
-        <button className="mt-3 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-          View Details
-        </button>
-        
-      </Link>
-      
+        <Link to={`/plants/${plant.plantId}`}>
+          <button className="mt-3 bg-green-600 text-white w-full  py-2 rounded hover:bg-green-700 cursor-pointer hover:scale-105 transition-transform duration-200 ">
+            View Details
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

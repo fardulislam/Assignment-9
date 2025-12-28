@@ -53,11 +53,11 @@ const Signin = () => {
       .then((result) => {
         console.log(result);
         setloading(false)
-        if (!result.user.emailVerified) {
-          toast.error("Please verify your email first");
+        // if (!result.user.emailVerified) {
+        //   toast.error("Please verify your email first");
        
-          return;
-        }
+        //   return;
+        // }
         setuser(result.user);
         toast.success("successfully sign in");
         Navigate(from);

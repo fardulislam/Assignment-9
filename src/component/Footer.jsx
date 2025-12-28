@@ -1,10 +1,12 @@
 import React from "react";
-
+import logo from "../assets/green_plants_icon-removebg-preview.png";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
+      <footer className="footer sm:footer-horizontal bg-gray-300  text-base-content p-10">
         <nav>
+          <img className="w-15 " src={logo} alt="" />
+          <p className="font-bold text-xl">GreenNest</p>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
           <a className="link link-hover">Design</a>
@@ -56,6 +58,14 @@ const Footer = () => {
             </a>
           </div>
         </nav>
+      </footer>
+      <footer className="footer sm:footer-horizontal footer-center bg-black text-base-content  p-4 ">
+        <aside >
+          <p className="text-green-500">
+            Copyright © {new Date().getFullYear()} - All right reserved by ACME
+            Industries Ltd
+          </p>
+        </aside>
       </footer>
     </div>
   );

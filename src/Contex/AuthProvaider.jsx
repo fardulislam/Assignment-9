@@ -5,7 +5,7 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
-  sendEmailVerification,
+  // sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -69,11 +69,11 @@ const AuthProvaider = ({ children }) => {
     });
   };
 
-//   send email verification //
+  // send email verification //
 
-const sendEmailVerificationfunc = ()=>{
-    return sendEmailVerification(auth.currentUser)
-}
+// const sendEmailVerificationfunc = ()=>{
+//     return sendEmailVerification(auth.currentUser)
+// }
 
   const authinfo = {
     user,
@@ -85,7 +85,7 @@ const sendEmailVerificationfunc = ()=>{
     signoutuserfunc,
     sendPasswordResetEmailfunc,
     updateProfilefund,
-    sendEmailVerificationfunc,
+    // sendEmailVerificationfunc,
     loading,
     setloading,
   };
@@ -101,7 +101,7 @@ const sendEmailVerificationfunc = ()=>{
   }
  },[])
 
-  return <AuthContext value={authinfo}>{children}</AuthContext>;
+  return <AuthContext.Provider value={authinfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvaider;

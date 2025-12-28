@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Mylinks from "./Mylinks";
-import logo from "../assets/green plants icon.jpg";
+import logo from "../assets/green_plants_icon-removebg-preview.png";
 import { AuthContext } from "../Contex/AuthContext";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
@@ -8,6 +8,7 @@ import { Link } from "react-router";
 const Navber = () => {
   const { user, signoutuserfunc, setuser ,loading,setloading} = useContext(AuthContext);
   console.log(user);
+    console.log("PHOTO URL:", user?.photoURL);
 
   // sign out //
   const hendlesignout = () => {
@@ -37,10 +38,10 @@ const Navber = () => {
     </>
   );
   return (
-    <div className="w-full shadow-sm">
+    <div className=" shadow-sm bg-base-100 w-full">
       <div className="w-11/12 mx-auto">
-        <div className="navbar bg-base-100 ">
-          <div className="navbar-start">
+        <div className="navbar ">
+          <div className="navbar-start  ">
             <div className="dropdown">
               <div
                 tabIndex={0}
@@ -76,7 +77,8 @@ const Navber = () => {
           <div className="navbar-center hidden lg:flex">{links}</div>
          <div className="navbar-end">
            {loading? (<span className="loading loading-dots loading-md "></span>) : user ? (
-            <div className=" text-center navbar-end dropdown dropdown-end">
+
+            <div className=" text-center navbar-end dropdown dropdown-end gap-4">
               
               <button
                 className=""
@@ -85,14 +87,17 @@ const Navber = () => {
                   { anchorName: "--anchor-1" } /* as React.CSSProperties */
                 }
               >
-                <img
-                  className="h-[40px] w-[40px] rounded-full mx-auto"
+               <div className="w-10 h-10 rounded-full overflow-hidden">
+                 <img
+                  className="h-full w-full object-cover"
                   src={
                     user?.photoURL ||
-                    "https://i.ibb.co.com/mVq8rsrb/photo-1610568781018-995405522539.avif"
+                    "https://i.ibb.co.com/DfnvJ7rN/premium-photo-1723677830933-4a9d84d17b4a.avif"
                   }
                   alt=""
                 />
+               </div>
+                
               </button>
 
               <div
@@ -112,7 +117,12 @@ const Navber = () => {
                   sign out
                 </button>
               </div>
+              <button  onClick={hendlesignout} className=" btn btn-primary ">
+                <Link to={'/signup'}>sign out</Link>
+              </button>
             </div>
+            
+             
           ) : (
             <div className="navbar-end">
               <a className="btn btn-primary "><Link to={'/signin'}>Sign in</Link></a>

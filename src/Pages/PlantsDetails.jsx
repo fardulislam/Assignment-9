@@ -3,11 +3,12 @@ import { useParams } from "react-router";
 import { PlantsContext } from "../Contex/PlantsContext";
 
 const PlantsDetails = () => {
+
   const {plantId} = useParams(); 
   const plants = useContext(PlantsContext); 
   const plant = plants.find(p => p.plantId === Number(plantId)); 
 
-  if (!plant) return <p>Plant not found!</p>;
+  if (!plant) return <p className="bg-base-200 h-screen flex justify-center items-center text-7xl text-sky-300">Plant not found!</p>;
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold">{plant.plantName}</h1>

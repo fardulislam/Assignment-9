@@ -8,6 +8,7 @@ import Signin from "../Pages/Signin";
 import Priviteroute from "../Priviterouter/Priviteroute";
 import PlantsDetails from "../Pages/PlantsDetails";
 import { createBrowserRouter } from "react-router";
+import EditProfile from "../Pages/EditProfile";
 
 
 
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
         element:<Priviteroute>
           <Myprofile></Myprofile>
         </Priviteroute>,
+      },
+      {
+        path:'/editprofile',
+        element:<EditProfile></EditProfile>
       },
       {
         path:'/signup',
