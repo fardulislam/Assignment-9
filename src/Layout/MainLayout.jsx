@@ -10,7 +10,7 @@ import { PlantsContext } from '../Contex/PlantsContext';
 const MainLayout = () => {
     const plants = useLoaderData();
 
-console.log("Loader data:", plants);
+// console.log("Loader data:", plants);
     return (
         <div  className='bg-base-200 '>
          <PlantsContext.Provider value={plants}>

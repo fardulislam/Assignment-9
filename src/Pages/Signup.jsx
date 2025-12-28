@@ -27,7 +27,7 @@ const Signup = () => {
     const photoURL = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(displayName, photoURL, email, password);
+    // console.log(displayName, photoURL, email, password);
 
     if (password.length < 6) {
       toast.error("password should be at least 6 digit");
@@ -51,7 +51,7 @@ const Signup = () => {
         updateProfilefund(displayName, photoURL)
           .then((res) => {
             sendEmailVerificationfunc().then((res) => {
-              console.log(res);
+              // console.log(res);
               setloading(false);
               if (!result.user?.emailVerified) {
                 
@@ -69,13 +69,13 @@ const Signup = () => {
               .catch((e) => {
                 toast.error(e.message);
               });
-            console.log(res);
+            // console.log(res);
             // toast.success('signup successful')
           })
           .catch((e) => {
             toast.error(e.message);
           });
-        console.log(result.user);
+        // console.log(result.user);
         // toast.success("sign up successfully ");
       })
       .catch((error) => {

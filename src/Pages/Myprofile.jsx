@@ -5,7 +5,7 @@ import {  useNavigate } from "react-router";
 const Myprofile = () => {
   const { user, loading } = useContext(AuthContext);
   const navitate = useNavigate()
-  console.log(user);
+  // console.log(user);
   if (loading) {
     return <span className="loading loading-dots loading-lg"></span>;
   }

@@ -92,7 +92,7 @@ const AuthProvaider = ({ children }) => {
 
  useEffect(()=>{
   const unsuscrib =  onAuthStateChanged(auth,(curruser)=>{
-    console.log(curruser)
+    // console.log(curruser)
     setuser(curruser)
     setloading(false)
   })

@@ -16,7 +16,7 @@ const EditProfile = () => {
       toast.success("Profile updated!");
       navigate("/profile"); // redirect back to profile
     } catch (err) {
-      console.error(err);
+    //   console.error(err);
       alert("Failed to update profile");
     }
   };

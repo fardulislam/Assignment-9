@@ -30,7 +30,7 @@ const Signin = () => {
   const Navigate = useNavigate()
   const location = useLocation()
   const from = location.state || '/';
-  console.log(location)
+  // console.log(location)
 
   if(user){
     Navigate('/');
@@ -47,11 +47,11 @@ const Signin = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(email, password);
+    // console.log(email, password);
 
     signInWithEmailAndPasswordfunc(email, password)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setloading(false)
         // if (!result.user.emailVerified) {
         //   toast.error("Please verify your email first");
@@ -102,7 +102,7 @@ const Signin = () => {
   const hendlegooglesignin = () => {
    signInWithemailPopupfunc()
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setloading(false);
         toast.success("google signin successful");
         setuser(result.user);
@@ -118,7 +118,7 @@ const Signin = () => {
   const hendlegithubsignin = () => {
     signInWithgithubPopupfunc()
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setloading(false)
         setuser(result.user);
         toast.success("github signin successful");
@@ -131,7 +131,7 @@ const Signin = () => {
 
  
 
-  console.log(user);
+  // console.log(user);
   return (
     <div className="flex  flex-col md:flex-row p-20 justify-center min-h-screen items-center  gap-10 md:gap-30 bg-green-300">
       <div className="space-y-2 my-10  text-center md:text-start">

@@ -3,132 +3,90 @@ import Mylinks from "./Mylinks";
 import logo from "../assets/green_plants_icon-removebg-preview.png";
 import { AuthContext } from "../Contex/AuthContext";
 import { toast } from "react-toastify";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router"; // useNavigate যোগ করা ভালো
 
 const Navber = () => {
-  const { user, signoutuserfunc, setuser ,loading,setloading} = useContext(AuthContext);
-  console.log(user);
-    console.log("PHOTO URL:", user?.photoURL);
+  const { user, signoutuserfunc, setuser, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  // sign out //
   const hendlesignout = () => {
     signoutuserfunc()
       .then(() => {
-        toast.success("signout successful");
+        toast.success("Signout successful");
         setuser(null);
+        navigate("/signin"); // সাইন আউট হলে সাইন ইন পেজে নিয়ে যাবে
       })
       .catch((e) => {
         toast.error(e.message);
       });
   };
-  console.log(loading)
-  const links = (
+
+  // নেভিগেশন লিংকগুলো এখানে আলাদা রাখা হয়েছে
+  const navLinks = (
     <>
-      <ul className="flex justify-center gap-5 items-center">
-        <li>
-          <Mylinks to={"/"}>Home</Mylinks>
-        </li>
-        <li>
-          <Mylinks to={"/plants"}>Plants</Mylinks>
-        </li>
-        { user && (<li>
-          <Mylinks to={"/profile"}>Profile</Mylinks>
-        </li>)}
-      </ul>
+      <li><Mylinks to="/">Home</Mylinks></li>
+      <li><Mylinks to="/plants">Plants</Mylinks></li>
+      {user && <li><Mylinks to="/profile">Profile</Mylinks></li>}
     </>
   );
+
   return (
-    <div className=" shadow-sm bg-base-100 w-full">
+    <div className="shadow-sm bg-base-100 w-full sticky top-0 z-50">
       <div className="w-11/12 mx-auto">
-        <div className="navbar ">
-          <div className="navbar-start  ">
+        <div className="navbar p-0">
+          
+          {/* Navbar Start: Logo and Mobile Menu */}
+          <div className="navbar-start">
             <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:hidden"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {" "}
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />{" "}
+              <label tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
-              </div>
-              <ul
-                tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-              >
-                {links}
+              </label>
+              <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[50] p-2 shadow bg-base-100 rounded-box w-52">
+                {navLinks}
               </ul>
             </div>
-            <img className="w-15 " src={logo} alt="" />
-            <p className="font-bold text-xl">GreenNest</p>
+            <Link to="/" className="flex items-center gap-2">
+                <img className="w-10" src={logo} alt="Logo" />
+                <p className="font-bold text-xl hidden sm:block">GreenNest</p>
+            </Link>
           </div>
-          <div className="navbar-center hidden lg:flex">{links}</div>
-         <div className="navbar-end">
-           {loading? (<span className="loading loading-dots loading-md "></span>) : user ? (
 
-            <div className=" text-center navbar-end dropdown dropdown-end gap-4">
-              
-              <button
-                className=""
-                popoverTarget="popover-1"
-                style={
-                  { anchorName: "--anchor-1" } /* as React.CSSProperties */
-                }
-              >
-               <div className="w-10 h-10 rounded-full overflow-hidden">
-                 <img
-                  className="h-full w-full object-cover"
-                  src={
-                    user?.photoURL ||
-                    "https://i.ibb.co.com/DfnvJ7rN/premium-photo-1723677830933-4a9d84d17b4a.avif"
-                  }
-                  alt=""
-                />
-               </div>
-                
-              </button>
+          {/* Navbar Center: Desktop Menu */}
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1 gap-2">
+              {navLinks}
+            </ul>
+          </div>
 
-              <div
-                className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
-                popover="auto"
-                id="popover-1"
-                style={
-                  { positionAnchor: "--anchor-1" } /* as React.CSSProperties */
-                }
-              >
-                <h2 className="text-xl font-semibold">{user?.displayName}</h2>
-                <p className="">{user?.email}</p>
-                <button
-                  className="w-full btn btn-neutral mt-4 hover:scale-105 transition-transform duration-200"
-                  onClick={hendlesignout}
-                >
-                  sign out
-                </button>
+          {/* Navbar End: User Profile & Buttons */}
+          <div className="navbar-end gap-4">
+            {loading ? (
+              <span className="loading loading-dots loading-md"></span>
+            ) : user ? (
+              <div className="dropdown dropdown-end ">
+                <label tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full border">
+                    <img 
+                        src={user?.photoURL || "https://i.ibb.co/DfnvJ7rN/premium-photo.avif"} 
+                        alt="User" 
+                    />
+                  </div>
+                </label>
+                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                  <li className="px-4 py-2 font-semibold text-[#0F3D2E] border-bottom">{user?.displayName || "User"}</li>
+                  <li className="px-4 pb-2 text-xs opacity-70">{user?.email}</li>
+                  <div className="divider my-0"></div>
+                  <li><button onClick={hendlesignout} className="text-red-500">Sign Out</button></li>
+                </ul>
+                <Link to="/signout" className="btn btn-sm md:btn-md text-white bg-[#0F3D2E] ml-4">Sign out</Link>
               </div>
-              <button  onClick={hendlesignout} className=" btn text-white bg-[#0F3D2E] ">
-                <Link to={'/signup'}>sign out</Link>
-              </button>
-            </div>
-            
-             
-          ) : (
-            <div className="navbar-end">
-              <a className="btn text-white bg-[#0F3D2E]"><Link to={'/signin'}>Sign in</Link></a>
-            </div>
-          )}
-         </div>
+            ) : (
+              <Link to="/signin" className="btn btn-sm md:btn-md text-white bg-[#0F3D2E]">Sign in</Link>
+            )}
+          </div>
+
         </div>
       </div>
     </div>

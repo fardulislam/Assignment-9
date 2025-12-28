@@ -7,7 +7,7 @@ const Priviteroute = ({children}) => {
 
     const {user,loading}=useContext(AuthContext)
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
     if(loading){
         return (
             <div className='h-screen flex justify-center items-center'>
