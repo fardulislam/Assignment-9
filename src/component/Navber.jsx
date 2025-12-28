@@ -80,7 +80,9 @@ const Navber = () => {
                   <div className="divider my-0"></div>
                   <li><button onClick={hendlesignout} className="text-red-500">Sign Out</button></li>
                 </ul>
-                <Link to="/signout" className="btn btn-sm md:btn-md text-white bg-[#0F3D2E] ml-4">Sign out</Link>
+                <button  onClick={hendlesignout} className="btn btn-sm md:btn-md text-white bg-[#0F3D2E] ml-4">
+                  sign out
+                </button>
               </div>
             ) : (
               <Link to="/signin" className="btn btn-sm md:btn-md text-white bg-[#0F3D2E]">Sign in</Link>
