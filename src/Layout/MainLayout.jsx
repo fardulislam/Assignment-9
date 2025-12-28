@@ -21,8 +21,7 @@ console.log("Loader data:", plants);
                 <Outlet>    
             </Outlet>
             </main>
-           <footer className='pt-10'>
-         
+           <footer className=''>
              <Footer></Footer>
            </footer>
          </PlantsContext.Provider>

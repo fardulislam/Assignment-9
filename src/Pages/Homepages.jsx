@@ -39,7 +39,6 @@ const Homepages = () => {
         <Sectiontitle2></Sectiontitle2>
         <ChosePlant></ChosePlant>
         <Selectplants></Selectplants>
-        
        </section>
 
       </main>

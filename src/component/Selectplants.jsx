@@ -2,7 +2,7 @@ import React from 'react';
 import plantImage from '../assets/plants imgae.avif'
  const Selectplants = () => {
     return (
-        <div className="flex items-center bg-[#1F3B2E] text-white p-6 rounded-2xl w-full h-100 mx-auto shadow-lg mt-10">
+        <div className="flex items-center bg-[#1F3B2E] text-white p-6 rounded-2xl w-full h-100 mx-auto shadow-lg my-10">
       {/* Text section */}
       <div className="flex-1 pr-6">
         <p className="text-sm md:text-base mb-4">

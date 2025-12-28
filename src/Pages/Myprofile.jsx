@@ -15,7 +15,7 @@ const Myprofile = () => {
   }
   return (
    <div >
-     <div className="max-w-md mx-auto mt-10 p-5 shadow rounded flex flex-col items-center justify-center space-y-1 bg-gray-400">
+     <div className="max-w-md mx-auto my-10 p-5 shadow rounded flex flex-col items-center justify-center space-y-1 bg-gray-400">
       <img
         className="h-[80px] w-[80px] rounded-full mx-auto"
         src={
